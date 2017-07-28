@@ -10,6 +10,7 @@ Requisitos
 -------------
 Nesse exemplo estarei usando como SGBD o FIREBIRD. 
 http://firebirdsql.org/
+
 Estarei usando a IDE IBexpert para a execução e visualização dos comandos SQL e PL/SQL 
 http://www.ibexpert.net/ibe/
 
@@ -22,6 +23,7 @@ http://www.ibexpert.net/ibe/
 Com o Firebird devidamente instalado acesse a IDE IBexpert: 
 Database > New Database... 
 Na Janela que se abre informe as características do banco de dados.
+
 ![Criando Banco de Dados](http://senavalet.com/upload/data/knn/create%20%20database.jpg) 
 
 #### Criando as Tabelas.
@@ -46,6 +48,7 @@ ALTER TABLE TBL_TRAIN ADD CONSTRAINT PK_TBL_TRAIN PRIMARY KEY (ID_TRAIN);
 
 ```
 ![Estrutura das tabelas](http://senavalet.com/upload/data/knn/Estrutura%20tabela.jpg)
+
 Explicação: 
 Serão criadas duas tabelas para o armazenamento das informações de X1,Y1 e X2,Y2
 No exemplo elas receberão os nomes de TBL_TEST e TBL_TRAIN
@@ -54,7 +57,7 @@ Um campo Sapato que sera nosso X na formula de calculo de distância.
 Um campo Altura que sera nosso Y na formula de calculo de distância. 
 > **Nota:**
 
-> - O arquivo de inserção dos dados utilizados no teste estão na repositório do projeto.
+> - O arquivo de inserção dos dados utilizados no teste estão no repositório do projeto.
 
 
 #### Criando uma visão para calcular a distância euclidiana entres os registros.
@@ -86,6 +89,7 @@ ORDER BY 1 ASC /* Ordenando para que sempre mostre os mais próximos (menor dist
 
 ```
 ![Visão que calcula a distância](http://senavalet.com/upload/data/knn/vw_dist%C3%A2ncia.png)
+
 Explicação: 
 A visão retornará no seu primeiro campo a distância euclidiana entre o registro da tabela teste para cada registro da tabela treino. 
 Pra que fique uma melhor visualização trouxe no corpo da visão o ID de treino e de teste e a classe de ambos. 
@@ -93,7 +97,7 @@ as ID's e classes também serão utilizadas no próximo passo da implementação
 
 
 
-####Criando uma Procedure que  analisa os 5 vizinhos mais próximos e já verifica a quantidade de acerto e de erros quanto a classe do teste. 
+#### Criando uma Procedure que  analisa os 5 vizinhos mais próximos e já verifica a quantidade de acerto e de erros quanto a classe do teste. 
 Segue código da procedure. 
 ```sql
 CREATE OR ALTER PROCEDURE PRC_COMPARA_ACERTOS 
@@ -130,6 +134,7 @@ END END;
 
 ```
 ![Comparação dos erros e acertos](http://senavalet.com/upload/data/knn/prc_compara_acertos.png)
+
 Explicação: 
 Este numero 5 é o K de vizinhos a ser considerado. 
 A procedure faz uma busca pelos 5 primeiros registros de cada id de teste e analisa quantos acertos e quantos erros o algorítimo obteve com o calculo de porcentagem. 
@@ -137,7 +142,7 @@ Com isso é possível vermos a eficácia do algorítimo.
 Para exemplificar criei mais uma procedure para emitir os resultados.  
 
 
-####Exemplificando o resultado
+#### Exemplificando o resultado
 É necessário criar uma procedure para mostrar o resultado final. 
 Segue o código da procedure.
 ```sql
